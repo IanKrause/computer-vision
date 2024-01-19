@@ -41,6 +41,7 @@ def storeMultiRes(testName, resultsDict):
 def loadMultiRes(testName):
     resName = "%s/%s.npz" % (STORAGE, testName)
     if not os.path.exists(resName):
+        print(resName)
         print("Can't find result %s, giving up" % testName)
         sys.exit(1)
 

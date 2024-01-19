@@ -15,6 +15,7 @@ def t1(L):
     Hint: vstack/hstack/dstack, no for loop
     """
     stackedForm = np.vstack(L)
+    
     return stackedForm
 
 
@@ -35,7 +36,11 @@ def t2(X):
     2) np.argmin
     3) Watch rows and columns!
     """
-    return None
+    eigenValues, eigenVectors = np.linalg.eig(X)
+    minIndex = np.argmin(eigenValues)
+    myEigenVector = eigenVectors[:,minIndex]
+
+    return myEigenVector
 
 
 def t3(X):

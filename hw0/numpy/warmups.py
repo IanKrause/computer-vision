@@ -11,7 +11,8 @@ def w1(X):
 
     Hint: Trust that numpy will do the right thing
     """
-    return None
+    Y = X*10 + 100
+    return Y
 
 
 def w2(X, Y):
@@ -25,7 +26,8 @@ def w2(X, Y):
 
     Hint: Trust that numpy will do the right thing
     """
-    return None
+    Z = X + 10*Y
+    return Z
 
 
 def w3(X, Y):
@@ -39,7 +41,8 @@ def w3(X, Y):
 
     Hint: By analogy to +, * will do the same thing
     """
-    return None
+    Z = X*Y - 10
+    return Z
 
 
 def w4(X, Y):
@@ -62,7 +65,8 @@ def w4(X, Y):
     Is this matrix multiplication?
 
     """
-    return None
+    matrixProd = X@Y
+    return matrixProd
 
 
 def w5(X):
@@ -75,7 +79,8 @@ def w5(X):
 
     Hint: Check .astype() !
     """
-    return None
+    myIntArray = X.astype(int)
+    return myIntArray
 
 
 def w6(X, Y):
@@ -88,7 +93,8 @@ def w6(X, Y):
     A numpy array Z such that Z[i] = float(X[i]) / float(Y[i])
 
     """
-    return None
+    Z = X.astype(float) / Y.astype(float)
+    return Z
 
 
 def w7(X):
@@ -104,7 +110,8 @@ def w7(X):
     1) np.reshape
     2) You can specify an unknown dimension as -1
     """
-    return None
+    myReshapedArray = np.reshape(X,(X.shape[0]*X.shape[1],1))
+    return myReshapedArray
 
 
 def w8(N):
@@ -118,7 +125,8 @@ def w8(N):
     Hint: The error "data type not understood" means you probably called
     np.ones or np.zeros with two arguments, instead of a tuple for the shape
     """
-    return None
+    myNewArray = np.zeros((N,2*N))
+    return myNewArray
 
 
 def w9(X):
@@ -131,7 +139,8 @@ def w9(X):
 
     Hint: Try boolean array indexing
     """
-    return None
+    Y = X > 0.5
+    return Y
 
 
 def w10(N):
@@ -144,7 +153,8 @@ def w10(N):
 
     Hint: np.arange
     """
-    return None
+    X = np.arange(0,N)
+    return X
 
 
 def w11(A, v):
@@ -156,7 +166,8 @@ def w11(A, v):
     Returns:
     Numpy array of shape (N, 1) giving the matrix-vector product Av
     """
-    return None
+    myArray = A@v
+    return myArray
 
 
 def w12(A, v):
@@ -169,7 +180,8 @@ def w12(A, v):
     Numpy array of shape (N, 1) giving the matrix-vector product of the inverse
     of A and v: A^-1 v
     """
-    return None
+    myArray = np.linalg.inv(A)@v
+    return myArray
 
 
 def w13(u, v):
@@ -183,7 +195,8 @@ def w13(u, v):
 
     Hint: .T
     """
-    return None
+    innerProduct = u.T@v
+    return innerProduct
 
 
 def w14(v):
@@ -195,7 +208,8 @@ def w14(v):
     The L2 norm of v: norm = (sum_i^N v[i]^2)^(1/2)
     You MAY NOT use np.linalg.norm
     """
-    return None
+    myNorm = np.sqrt(np.sum(np.square(v)))
+    return myNorm
 
 
 def w15(X, i):
@@ -207,7 +221,8 @@ def w15(X, i):
     Returns:
     Numpy array of shape (M,) giving the ith row of X
     """
-    return None
+    myArray = X[i,:]
+    return myArray
 
 
 def w16(X):
@@ -220,7 +235,8 @@ def w16(X):
 
     Hint: np.sum
     """
-    return None
+    mySum = np.sum(X)
+    return mySum
 
 
 def w17(X):
@@ -233,7 +249,8 @@ def w17(X):
 
     Hint: np.sum has an optional "axis" argument
     """
-    return None
+    S = np.sum(X,axis=1)
+    return S
 
 
 def w18(X):
@@ -246,7 +263,8 @@ def w18(X):
 
     Hint: Same as above
     """
-    return None
+    S = np.sum(X,axis=0)
+    return S
 
 
 def w19(X):
@@ -259,7 +277,8 @@ def w19(X):
 
     Hint: np.sum has an optional "keepdims" argument
     """
-    return None
+    S = np.sum(X,axis=1,keepdims=True)
+    return S
 
 
 def w20(X):
@@ -270,4 +289,5 @@ def w20(X):
     Returns:
     A numpy array S of shape (N, 1) where S[i] is the L2 norm of row i of X
     """
-    return None
+    S = np.linalg.norm(X,ord=2,axis=1,keepdims=True)
+    return S
