@@ -60,7 +60,10 @@ def t3(X):
     2) X[S] = v assigns the value v to all entires of X corresponding to
        true values of S.
     """
-    return None
+    S = X < 0.0
+    X[S] = 0.0
+    copyOfX = X
+    return copyOfX
 
 
 def t4(R, X):
@@ -80,7 +83,8 @@ def t4(R, X):
        by the matrix R.
     2) .T gives the transpose of a matrix
     """
-    return None
+    Y = (R@X.T).T
+    return Y
 
 
 def t5(X):
@@ -100,7 +104,8 @@ def t5(X):
        from rows y0 to (but not including!) y1
        from columns x0 (but not including!) x1
     """
-    return None
+    myMatrix = X[0:4,0:4] - X[-4:,-4:]
+    return myMatrix
 
 
 def t6(N):
@@ -115,7 +120,12 @@ def t6(N):
     Par: 6 lines
     Instructor: 3 lines
     """
-    return None
+    myArray = np.ones((N,N))
+    myArray[0:5,:] = 0
+    myArray[:,0:5] = 0
+    myArray[-5:,:] = 0
+    myArray[:,-5:] = 0
+    return myArray
 
 
 def t7(X):
@@ -139,7 +149,10 @@ def t7(X):
     4) Elementwise operations between an array of shape (N, M) and an array of
        shape (N,) won't work -- try reshaping
     """
-    return None
+    # N number of M-length vectors
+    vectorMagnitudes = np.linalg.norm(X,ord=2,axis=1,keepdims=True)
+    Y = X / vectorMagnitudes
+    return Y
 
 
 def t8(X):
@@ -159,7 +172,10 @@ def t8(X):
     2) Normalize the rows individually
     3) You may have to reshape
     """
-    return None
+    axisMean = np.mean(X,axis=1,keepdims=True)
+    axisStdDev = np.std(X,axis=1,keepdims=True)
+    Y = (X - axisMean) / axisStdDev
+    return Y
 
 
 def t9(q, k, v):
@@ -181,7 +197,15 @@ def t9(q, k, v):
     2) Recall that np.sum has useful "axis" and "keepdims" options
     3) np.exp and friends apply elementwise to arrays
     """
-    return None
+    # sum of i to N of exp(-||q-k_i||^2) * v[i] -- GOAL
+
+    # should be a (N,K) matrix from the subtracting each row of k from q
+    difference = q - k
+    # should be a (N,1) vector from taking the norm along axis 1 for the difference matrix
+    insideExponential = -np.square(np.linalg.norm(difference,ord=2,axis=1,keepdims=True))
+    # should be the sum of a (N,1) vector along axis 0
+    mySum = np.sum(np.exp(insideExponential)*v,keepdims=True)[0,0]
+    return mySum
 
 
 def t10(Xs):
@@ -205,7 +229,19 @@ def t10(Xs):
     5) Our 3-line solution uses no loops, and uses the algebraic trick from the
        next problem.
     """
-    return None
+    # N rows of vectors with those vectors having M dimensions
+    L = len(Xs)
+    R = np.zeros((L,L))
+
+    for i in range(0,L):
+        Xi = Xs[i]
+        Ci = np.mean(Xi,axis=0,keepdims=True)
+        for j in range(0,L):
+            Xj = Xs[j]
+            Cj = np.mean(Xj,axis=0,keepdims=True)
+            euclidanDistance = np.linalg.norm(Ci-Cj,ord=2,keepdims=True)
+            R[i,j] = euclidanDistance
+    return R
 
 
 def t11(X):
@@ -230,7 +266,13 @@ def t11(X):
        causing the square root to crash. Just take max(0, value) before the
        square root. Seems to occur on Macs.
     """
-    return None
+    P = X@X.T
+    S = np.square(np.linalg.norm(X,ord=2,axis=1,keepdims=True))
+    matrixN = S + S.T
+    pre= matrixN - 2*P
+    pre[pre < 0.0] = 0.0
+    D = np.sqrt(pre)
+    return D
 
 
 def t12(X, Y):
@@ -249,7 +291,17 @@ def t12(X, Y):
 
     Hints: Similar to previous problem
     """
-    return None
+    # 2-norm of X is a (N,1) matrix
+    # 2-norm of Y is a (M,1) matrix
+    # i iterates through length of X which is N
+    # j iterates through length of Y which is M
+    P = X@Y.T
+    Sx = np.square(np.linalg.norm(X,ord=2,axis=1,keepdims=True))
+    Sy = np.square(np.linalg.norm(Y,ord=2,axis=1,keepdims=True))
+    pre = Sx + Sy.T - 2*P
+    pre[pre < 0.0] = 0.0
+    D = np.sqrt(pre)
+    return D
 
 
 def t13(q, V):
@@ -266,7 +318,8 @@ def t13(q, V):
 
     Hint: np.argmax
     """
-    return None
+    index = np.argmax(q@V.T)
+    return index
 
 
 def t14(X, y):
@@ -283,7 +336,8 @@ def t14(X, y):
 
     Hint: np.linalg.lstsq or np.linalg.solve
     """
-    return None
+    w, residual, rank, s = np.linalg.lstsq(X,y,rcond=None)
+    return w
 
 
 def t15(X, Y):
@@ -301,7 +355,8 @@ def t15(X, Y):
 
     Hint: np.cross
     """
-    return None
+    C = np.cross(X,Y,axis=1)
+    return C
 
 
 def t16(X):
@@ -321,7 +376,8 @@ def t16(X):
     1) If it doesn't broadcast, reshape or np.expand_dims
     2) X[:, -1] gives the last column of X
     """
-    return None
+    Y =  X[:,:-1] / np.expand_dims(X[:,-1],axis=1)
+    return Y
 
 
 def t17(X):
@@ -339,7 +395,8 @@ def t17(X):
 
     Hint: np.hstack, np.ones
     """
-    return None
+    Y = np.hstack([X,np.ones((X.shape[0],1))])
+    return Y
 
 
 def t18(N, r, x, y):
@@ -363,7 +420,14 @@ def t18(N, r, x, y):
     it without them, but np.meshgrid and np.arange are easier to understand. 
     2) Arrays have an astype method
     """
-    return None
+
+    # iIndex will be (N,N) with constant rows = i
+    # jIndex will be (N,N) with constant columns = j
+    jIndex, iIndex = np.meshgrid(np.arange(0,N),np.arange(0,N))
+    valueMatrix = np.sqrt(np.square(iIndex-y)+np.square(jIndex-x))
+    I = np.zeros((N,N))
+    I[valueMatrix < r] = 1
+    return I
 
 
 def t19(N, s, x, y):
@@ -381,7 +445,9 @@ def t19(N, s, x, y):
     Par: 3 lines
     Instructor: 2 lines
     """
-    return None
+    jIndex, iIndex = np.meshgrid(np.arange(0,N),np.arange(0,N))
+    I = np.exp(-(np.square(iIndex-y)+np.square(jIndex-x))/np.square(s))
+    return I
 
 
 def t20(N, v):
@@ -403,4 +469,6 @@ def t20(N, v):
        (The sign of the numerator tells which side the point is on)
     2) np.abs
     """
-    return None
+    jIndex, iIndex = np.meshgrid(np.arange(0,N),np.arange(0,N))
+    M = np.abs(v[0]*jIndex+v[1]*iIndex+v[2])/np.sqrt(np.square(v[0])+np.square(v[1]))
+    return M
