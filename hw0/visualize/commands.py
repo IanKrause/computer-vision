@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 if __name__ == "__main__":
     data_3_1 = np.load("mysterydata/mysterydata2.npy")
     for i in range(9):
-        plt.imsave("images/vis_3_1_%d.png" % i,data_3_1[:,:,i])
+        plt.imsave("images/vis_3_1_%d.png" % i,np.log(data_3_1[:,:,i] + 1.0))
 
     data_3_2 = np.load("mysterydata/mysterydata3.npy")
     minValue = np.nanmin(data_3_2)
