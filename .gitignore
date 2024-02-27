@@ -3,3 +3,11 @@ hw2/data/aerialseq.npy
 hw2/data/antseq.npy
 hw2/data/carseq.npy
 hw2/data/girlseq.npy
+hw3/data/ar_source.mov
+hw3/data/book.mov
+hw3/data/cv_cover.jpg
+hw3/data/hp_cover.jpg
+hw3/data/cv_desk.png
+hw3/data/hp_desk.png
+hw3/data/pano_left.jpg
+hw3/data/pano_right.jpg
